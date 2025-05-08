@@ -7,7 +7,7 @@ Quick Start
 Installation
 ------------
 
-You can install **tornado_openapi** from `PyPI <https://pypi.org/project/tornado_openapi/>`_ through usual means, such as ``pip``:
+You can install **tornado-openapi** from `PyPI <https://pypi.org/project/tornado_openapi/>`_ through usual means, such as ``pip``:
 
 .. code:: bash
 

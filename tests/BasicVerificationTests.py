@@ -193,4 +193,6 @@ async def oasMatchesSetup() -> None:
     assert oas.paths['/api/v2/fakes/{id}?name={name}'].trace is None
     assert len(oas.paths['/api/v2/fakes/{id}?name={name}'].put.responses.asDictionary()) == 2
     assert oas.paths['/api/v2/fakes/{id}?name={name}'].put.responses['204'] is not None
+    assert oas.paths['/api/v2/fakes/{id}?name={name}'].put.responses['204'].content is None
     assert oas.paths['/api/v2/fakes/{id}?name={name}'].put.responses['default'] is not None
+    assert oas.paths['/api/v2/fakes/{id}?name={name}'].put.responses['default'].content is None

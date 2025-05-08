@@ -30,10 +30,12 @@ def response(code:int|str, t:type = None, contentType:str = 'application/json', 
         if response is None:
             response = Response(
                 description=description,
-                content={}
+                content=None
             )
         if t is not None:
             content = response.content
+            if content is None:
+                content = dict[str,MediaType]()
             mt = content.get(contentType, None)
             if mt is not None:
                 raise Exception(f'Multiple definitions for "{contentType}" on "{target.__name__}".')
