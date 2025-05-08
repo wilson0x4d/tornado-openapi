@@ -6,7 +6,7 @@ from .OpenApiHandler import OpenApiHandler
 from .decorators import api, cookie, header, request, response, anonymous, apiKey, httpBasic, bearerToken, mutualTLS, oauth2, openId
 from .OpenApiConfiguration import OpenApiConfiguration
 from .OpenApiConfigurator import OpenApiConfigurator
-from . import objects
+from . import decorators, objects
 
 __all__ = [
     'MetaManager',

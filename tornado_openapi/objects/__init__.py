@@ -32,6 +32,7 @@ from .SecurityRequirement import SecurityRequirement
 from .SecurityScheme import SecurityScheme, SecuritySchemeType
 from .Server import Server
 from .ServerVariable import ServerVariable
+from .Tag import Tag
 from .Xml import Xml
 
 __all__ = [
@@ -66,5 +67,6 @@ __all__ = [
     'SecurityScheme', 'SecuritySchemeType',
     'Server',
     'ServerVariable',
+    'Tag',
     'Xml'
 ]

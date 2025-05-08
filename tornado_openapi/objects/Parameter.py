@@ -44,8 +44,8 @@ class Parameter(DescriptionObject):
         Restrictions
         ------------
 
-        * If in is "path", the name field MUST correspond to a template expression occurring within the path field in the Paths Object. See Path Templating for further information.
-        * If in is "header" and the name field is "Accept", "Content-Type" or "Authorization", the parameter definition SHALL be ignored.
+        * If ``location`` is ``PATH``, the name field MUST correspond to a template expression occurring within the path field in the Paths Object. See Path Templating for further information.
+        * If ``location`` is ``HEADER`` and the name field is "Accept", "Content-Type" or "Authorization", the parameter definition SHALL be ignored.
         * For all other cases, the name corresponds to the parameter name used by the in field.
 
         """
@@ -60,7 +60,7 @@ class Parameter(DescriptionObject):
         REQUIRED. The location of the parameter. Possible values are "query", "header", "path" or "cookie".
 
         ---
-        This is documented as ``in`` within the OAS3 specification.
+        This is documented as ``in`` within the OAS specification. Because this conflicts with Python's ``in`` keyword we use the term ``location``, instead. This should be consistent throughout the docs.
         """
         v = self.get('in', None)
         return None if v is None else ParameterLocation(v)
