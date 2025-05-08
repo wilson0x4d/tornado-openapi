@@ -1,7 +1,6 @@
 # SPDX-FileCopyrightText: Copyright (C) Shaun Wilson
 # SPDX-License-Identifier: MIT
 
-import asyncio
 import json
 from typing import Any
 from uuid import uuid4

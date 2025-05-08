@@ -3,7 +3,7 @@ Objects
 
 .. toctree::
     :titlesonly:
-    :maxdepth: 1
+    :maxdepth: 2
 
     Callback <Callback>
     Components <Components>

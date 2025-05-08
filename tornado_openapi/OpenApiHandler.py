@@ -9,7 +9,7 @@ from typing import Any
 import tornado
 import tornado.web
 
-from .decorators import MetaManager
+from .MetaManager import MetaManager
 from .OpenApiConfiguration import OpenApiConfiguration
 from .objects import Components, OpenAPI, Parameter, ParameterLocation, Paths, PathItem, Schema, SecurityRequirement, Operation
 
