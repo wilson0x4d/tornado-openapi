@@ -1,4 +1,6 @@
 request
 =======
 
-Indicates the content that a request handler method expects (aka. "request body")
+.. currentmodule:: tornado_openapi.decorators
+
+.. autofunction:: request

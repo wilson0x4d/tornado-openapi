@@ -1,4 +1,6 @@
 cookie
 ======
 
-Indicates that a request handler expects a cookie.
+.. currentmodule:: tornado_openapi.decorators
+
+.. autofunction:: cookie

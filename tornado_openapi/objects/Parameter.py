@@ -16,8 +16,7 @@ class Parameter(DescriptionObject):
 
     A unique parameter is defined by a combination of a name and location.
 
-    ##### Caveats
-    * Due to a Python having `in` as a reserved word, the `in` parameter is renamed `location` on this object. Internally this is still stored as `in` and will be serialized/deserialized as `in`.
+    .. note:: Due to Python having `in` as a reserved word, the `in` parameter is renamed `location` on this object. Internally this is still stored as `in` and will be serialized/deserialized as `in`.
     """
 
     def __init__(self, d:dict[str,Any] = None, name:str = None, location:ParameterLocation = None, description:str = None, required:bool = None, deprecated:bool = None, allowEmptyValue:bool = None, style:ParameterStyle = None, explode:bool = None, allowReserved:bool = None, schema:Schema = None, example:Any = None, examples:dict[str, Example] = None, content:dict[str, MediaType] = None) -> None:
@@ -42,10 +41,13 @@ class Parameter(DescriptionObject):
         """
         REQUIRED. The name of the parameter. Parameter names are case sensitive.
         
-        ##### Restrictions
+        Restrictions
+        ------------
+
         * If in is "path", the name field MUST correspond to a template expression occurring within the path field in the Paths Object. See Path Templating for further information.
         * If in is "header" and the name field is "Accept", "Content-Type" or "Authorization", the parameter definition SHALL be ignored.
         * For all other cases, the name corresponds to the parameter name used by the in field.
+
         """
         return self.get('name', None)
     @name.setter

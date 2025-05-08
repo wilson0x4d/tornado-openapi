@@ -3,19 +3,17 @@ Decorators
 
 .. toctree::
     :titlesonly:
-    :maxdepth: 2
+    :maxdepth: 1
 
-    api <api>
-    request <request>
-    response <response>
-    header <header>
-    cookie <cookie>
     anonymous <anonymous>
+    api <api>
     apiKey <apiKey>
-    httpBasic <httpBasic>
     bearerToken <bearerToken>
+    cookie <cookie>
+    header <header>
+    httpBasic <httpBasic>
     mutualTLS <mutualTLS>
     oauth2 <oauth2>
     openId <openId>
-
-.. automodule:: tornado_openapi
+    request <request>
+    response <response>

@@ -14,5 +14,5 @@ __all__ = [
     'OpenApiConfigurator',
     'OpenApiHandler',
     'api', 'cookie', 'header', 'request', 'response', 'anonymous', 'apiKey', 'httpBasic', 'bearerToken', 'mutualTLS', 'oauth2', 'openId',
-    'objects'
+    'decorators', 'objects'
 ]

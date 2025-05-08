@@ -12,7 +12,7 @@ class Encoding(DescriptionObject):
     """
     A single encoding definition applied to a single schema property. 
 
-    Properties are correlated with multipart parts using the name parameter of Content-Disposition: form-data, and with application/x-www-form-urlencoded using the query string parameter names. In both cases, their order is implementation-defined.
+    Properties are correlated with multipart parts using the name parameter of ``Content-Disposition: form-data``, and with ``application/x-www-form-urlencoded`` using the query string parameter names. In both cases, their order is implementation-defined.
     """
 
     def __init__(self, d:dict[str,Any] = None, contentType:str = None, headers:dict[str,Header] = None, style:ParameterStyle = None, explode:bool = None, allowReserved:bool = None) -> None:
@@ -26,7 +26,7 @@ class Encoding(DescriptionObject):
 
     @property
     def contentType(self) -> str|None:
-        """The Content-Type for encoding a specific property. The value is a comma-separated list, each element of which is either a specific media type (e.g. image/png) or a wildcard media type (e.g. image/*). Default value depends on the property type as shown in the table below."""
+        """The Content-Type for encoding a specific property. The value is a comma-separated list, each element of which is either a specific media type (e.g. ``image/png``) or a wildcard media type (e.g. ``image/*``). Default value depends on the property type as shown in the table below."""
         return self.get('contentType', None)
     @contentType.setter
     def contentType(self, v:str|None) -> None:
@@ -34,7 +34,6 @@ class Encoding(DescriptionObject):
             del self['contentType']
         else:
             self['contentType'] = v
-
 
     @property
     def headers(self) -> dict[str, Header|Reference]|None:

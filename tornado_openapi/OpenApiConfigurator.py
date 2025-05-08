@@ -15,7 +15,7 @@ from .OpenApiHandler import OpenApiHandler
 type OpenApiConfigurator = OpenApiConfigurator
 class OpenApiConfigurator:
     """
-    Configures an OpenAPI endpoint for the specified `tornado.web.Application`.
+    Configures an OpenAPI endpoint for the specified ``tornado.web.Application``.
 
     """
 
@@ -53,14 +53,14 @@ class OpenApiConfigurator:
     
     def pattern(self, pattern:str) -> OpenApiConfigurator:
         """
-        OPTIONAL. Sets the pattern for request matching. Default is `r'/(swagger.*)'`.
+        OPTIONAL. Sets the pattern for request matching. Default is ``r'/(swagger.*)'``.
         """
         self.__pattern = pattern
         return self
     
     def staticFilesPath(self, path:str) -> OpenApiConfigurator:
         """
-        OPTIONAL. Sets the path (relative or absolute) where `swagger-ui` static files can be found. Default is `"./swagger-ui"`.
+        OPTIONAL. Sets the path (relative or absolute) where ``swagger-ui`` static files can be found. Default is ``"./swagger-ui"``.
         """
         self.__staticFilesPath = path
         return self
@@ -85,9 +85,9 @@ class OpenApiConfigurator:
         """
         OPTIONAL. Indicates that API KEY Authentication is supported.
 
-        :param str name: The name of the header, query or cookie parameter containing the API KEY. Default is `'X-API-Key'`
+        :param str name: The name of the header, query or cookie parameter containing the API KEY. Default is ``'X-API-Key'``
         :param str description: A useful description of the API KEY authentication.
-        :param ParameterLocation location: The location of the API KEY. Default is `HEADER`.
+        :param ParameterLocation location: The location of the API KEY. Default is ``HEADER``.
         """
         self.__securitySchemes['apiKey'] = SecurityScheme(
             type=SecuritySchemeType.APIKEY,
@@ -156,7 +156,7 @@ class OpenApiConfigurator:
         """
         OPTIONAL. Indicates that OPENID Authentication is supported.
 
-        :param str openIdConnectUrl: [Well-known URL](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml) to discover the [OpenID-Connect-Discovery provider metadata](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata)..
+        :param str openIdConnectUrl: `Well-known URL <https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml>`_ to discover the `OpenID-Connect-Discovery provider metadata <https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata>`_..
         :param str description: A useful description of the OPENID authentication.
         """
         self.__securitySchemes['openIdConnect'] = SecurityScheme(

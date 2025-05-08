@@ -1,4 +1,6 @@
 header
 ======
 
-Indicates that a request handler expects a particular header.
+.. currentmodule:: tornado_openapi.decorators
+
+.. autofunction:: header

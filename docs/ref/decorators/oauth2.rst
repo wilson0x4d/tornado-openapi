@@ -1,4 +1,6 @@
 oauth2
 ======
 
-Indicates that OAUTH2 Auth is required.
+.. currentmodule:: tornado_openapi.decorators
+
+.. autofunction:: oauth2

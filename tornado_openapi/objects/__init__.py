@@ -13,6 +13,7 @@ from .Header import Header
 from .Info import Info
 from .License import License
 from .Link import Link
+from .MediaType import MediaType
 from .OAuthFlow import OAuthFlow
 from .OAuthFlows import OAuthFlows
 from .OpenAPI import OpenAPI
@@ -46,6 +47,7 @@ __all__ = [
     'Info',
     'License',
     'Link',
+    'MediaType',
     'OAuthFlow',
     'OAuthFlows',
     'OpenAPI',

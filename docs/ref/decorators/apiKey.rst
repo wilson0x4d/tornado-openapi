@@ -1,4 +1,6 @@
 apiKey
 ======
 
-Indicates that API KEY Auth is required.
+.. currentmodule:: tornado_openapi.decorators
+
+.. autofunction:: apiKey

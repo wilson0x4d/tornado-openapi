@@ -1,14 +1,15 @@
-Objects
+objects
 =======
 
 .. toctree::
     :titlesonly:
-    :maxdepth: 2
+    :maxdepth: 1
 
+    DescriptionObject <DescriptionObject>
     Callback <Callback>
     Components <Components>
     Contact <Contact>
-    Discriminator <Callback>
+    Discriminator <Discriminator>
     Encoding <Encoding>
     Example <Example>
     ExternalDocumentation <ExternalDocumentation>
@@ -37,5 +38,3 @@ Objects
     ServerVariable <ServerVariable>
     Tag <Tag>
     Xml <Xml>
-
-.. automodule:: tornado_openapi

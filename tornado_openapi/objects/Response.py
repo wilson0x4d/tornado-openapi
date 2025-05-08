@@ -50,7 +50,7 @@ class Response(DescriptionObject):
 
     @property
     def content(self) -> dict[str, MediaType]|None:
-        """A map containing descriptions of potential response payloads. The key is a media type or media type range and the value describes it. For responses that match multiple keys, only the most specific key is applicable. e.g. "text/plain" overrides "text/*"."""
+        """A map containing descriptions of potential response payloads. The key is a media type or media type range and the value describes it. For responses that match multiple keys, only the most specific key is applicable. e.g. ``"text/plain"`` overrides ``"text/*"``."""
         m = self.get('content', None)
         return None if m is None else {
                 k:MediaType(v)

@@ -1,5 +1,6 @@
 mutualTLS
 =========
 
-Indicates that MUTUAL TLS Auth is required.
+.. currentmodule:: tornado_openapi.decorators
 
+.. autofunction:: mutualTLS

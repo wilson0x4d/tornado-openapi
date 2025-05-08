@@ -1,4 +1,6 @@
 bearerToken
 ===========
 
-Indicates that BEARER TOKEN Auth is required.
+.. currentmodule:: tornado_openapi.decorators
+
+.. autofunction:: bearerToken
