@@ -55,7 +55,7 @@ In the above example, `FakeApi` is a subclass of `tornado.web.RequestHandler`. T
 
 ## Wait, where is `swagger-ui` ?!
 
-Alas, `swagger-ui` is NOT included as part of the `tornado-openapi` library. The reasons, in order of importance:
+Alas, `swagger-ui` is NOT included as part of the `tornado-openapi` package. The reasons, in order of importance:
 
 * We do not want to thrust a specific version of `swagger-ui` upon anyone. You may already have a version rolled into your front-end project, for example. You may want a version that is newer than what was current at the time the library was last published.
 * We do not wish to encounter licensing issues, as `swagger-ui` currently falls under a different license than the licenses we typically publish under.
