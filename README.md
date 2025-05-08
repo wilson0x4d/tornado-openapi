@@ -30,7 +30,7 @@ The simplest approach is to use `OpenApiConfigurator` to construct a configurati
         (r'/api/v2/fakes/(?P<id>\d+)?name=(?P<name>[^/][\dA-Za-z]+)', FakeApi)
     ])
     # you configure openapi
-    openapi.OpenApiConfigurator(self.__tornado)\
+    openapi.OpenApiConfigurator(app)\
         .pattern(r'/api/v2/(swagger.*)')\
         .info(openapi.objects.Info(
             title='My API',
@@ -100,4 +100,4 @@ Enjoy!
 
 ## Contact
 
-You can reach me on [Discord](https://discordapp.com/users/307684202080501761) or [open an Issue on Github](https://github.com/wilson0x4d/tornado_openapi/issues/new/choose).
+You can reach me on [Discord](https://discordapp.com/users/307684202080501761) or [open an Issue on Github](https://github.com/wilson0x4d/tornado-openapi/issues/new/choose).

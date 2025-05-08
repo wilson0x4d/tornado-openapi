@@ -34,7 +34,7 @@ The simplest approach is to use :py:class:`~tornado_openapi.OpenApiConfigurator`
         (r'/api/v2/fakes/(?P<id>\d+)?name=(?P<name>[^/][\dA-Za-z]+)', FakeApi)
     ])
     # you configure openapi
-    openapi.OpenApiConfigurator(self.__tornado)\
+    openapi.OpenApiConfigurator(app)\
         .pattern(r'/api/v2/(swagger.*)')\
         .info(openapi.objects.Info(
             title='My API',

@@ -8,7 +8,6 @@ Reference
     OpenApiConfigurator <OpenApiConfigurator>
     OpenApiConfiguration <OpenApiConfiguration>
     OpenApiHandler <OpenApiHandler>
-    MetaManager <MetaManager>
     decorators.* <decorators/index>
     objects.* <objects/index>
 
