@@ -54,7 +54,7 @@ The simplest approach is to use :py:class:`~tornado_openapi.OpenApiConfigurator`
         .staticFilesPath('./swagger-ui')\
         .commit()
 
-In the above example, ``FakeApi`` is a subclass of ``tornado.web.RequestHandler``. The path matches you configure for ``FakeApi`` are requried for OAS construction. There are more configuration options than are shown here, and there are decorators you can apply to your request handler classes and methods to augment OAS generation.
+In the above example, ``FakeApi`` is a subclass of ``tornado.web.RequestHandler``. The path matches you configure for ``FakeApi`` are required for OAS construction. There are more configuration options than are shown here, and there are decorators you can apply to your request handler classes and methods to augment OAS generation.
 
 
 Wait, where is ``swagger-ui`` ?!
@@ -65,7 +65,7 @@ Alas, ``swagger-ui`` is NOT included as part of the ``tornado-openapi`` package.
 * We do not want to thrust a specific version of ``swagger-ui`` upon anyone. You may already have a version rolled into your front-end project, for example. You may want a version that is newer than what was current at the time the library was last published.
 * We do not wish to encounter licensing issues, as ``swagger-ui`` currently falls under a different license than the licenses we typically publish under.
 * We want to keep our packages small. Storage costs money, networks get congested, and small packages are great for keeping CI/CD times low.
-* Indeed, we could rely on a CDN, but some enterprise security audits will identify a third-party CDN as a potential threat -- and again, we do nto want to thrust upon anyone a specific version of ``swagger-ui``.
+* Indeed, we could rely on a CDN, but some enterprise security audits will identify a third-party CDN as a potential threat -- and again, we don't want to thrust upon anyone a specific version of ``swagger-ui``.
 
 Worry not, by default ``tornado-openapi`` will serve ``swagger-ui`` out of the relative path ``./swagger-ui/`` if it is present. It will assume the contents are a "swagger-ui-dist" bundle, and it will assume the default document is "index.html". You can, of course, customize this by passing the relevant path information into :py:class:`~tornado_openapi.OpenApiHandler`.
 
@@ -98,7 +98,7 @@ Lastly, you can customize the static files path of ``swagger-ui`` and the url of
 
     (r'/(swagger.*)', openapi.OpenApiHandler, { swaggerStaticFiles='/path/to/swagger-ui' })
 
-Or if you are using :py:class:`~tornado_openapi.OpenApiConfigurator`, you can specify the location using the `staticFilesPath(...)` method (as seen in the above example code from the  ``Usage`` section.)
+Or if you are using :py:class:`~tornado_openapi.OpenApiConfigurator`, you can specify the location using the ``staticFilesPath(...)`` method (as seen in the ``Usage`` section, above.)
 
 
 Enjoy!
