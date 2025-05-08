@@ -5,8 +5,8 @@ from abc import ABC
 import json
 from typing import Any, ForwardRef
 
-DescriptionObject = ForwardRef('DescriptionObject')
 
+DescriptionObject = ForwardRef('DescriptionObject')
 class DescriptionObject(ABC):
     """
     A base class for all "Description Objects" that need to convert to/from dictionary objects internally.
@@ -16,24 +16,27 @@ class DescriptionObject(ABC):
 
     __d:dict[str,Any]
 
-    def __init__(self, data:dict[str,Any] = None):
-        self.__d = dict[str,Any]() if data is None else {
+    def __init__(self, d:dict[str,Any] = None):
+        self.__d = dict[str,Any]() if d is None else {
             k:v if not isinstance(v, DescriptionObject) else v.asDictionary()
-            for k,v in data.items()
+            for k,v in d.items()
         }
 
     def __getitem__(self, key:str) -> Any:
-        """Gets thev alue for the given key."""
+        """Get the value for the given key."""
         result = self.__d.get(key, None)
         return None if result is None else result
 
     def __setitem__(self, key:str, value:Any) -> None:
+        """Set the item to the given value. If ``value`` is ``None`` delete the item."""
         self.set(key, value)
 
     def __delitem__(self, key:str) -> None:
+        """Delete the item."""
         self.pop(key)
 
     def __str__(self) -> str:
+        """Serialize complex type as JSON."""
         try:
             return json.dumps(self.__d)
         except:
@@ -49,20 +52,8 @@ class DescriptionObject(ABC):
 
     def get(self, key:str, default:Any = None) -> Any:
         """Gets the value for the given key."""
-        result = self.__d.get(key, None)
-        return default if result is None else result
-
-    def set(self, key:str, value:None = None) -> None:
-        """Sets a value for the given key."""
-        if value is None:
-            self.pop(key)
-        elif isinstance(value, DescriptionObject):
-            self.__d[key] = value.asDictionary()
-        else:
-            self.__d[key] = value
-
-    def pop(self, key:str, default:Any = None) -> Any|None:
-        return self.__d.pop(key, default)
+        v = self.__d.get(key, None)
+        return default if v is None else v
 
     def merge(self, other:DescriptionObject|dict) -> Any:
         """
@@ -77,3 +68,16 @@ class DescriptionObject(ABC):
         # replace or update
         self.__d.update(other)
         return self
+
+    def pop(self, key:str, default:Any = None) -> Any|None:
+        """Delete the item, returning its value. If the item does not exist ``default`` is returned."""
+        return self.__d.pop(key, default)
+
+    def set(self, key:str, value:DescriptionObject|None = None) -> None:
+        """Sets a value for the given key."""
+        if value is None:
+            self.pop(key)
+        elif isinstance(value, DescriptionObject):
+            self.__d[key] = value.asDictionary()
+        else:
+            self.__d[key] = value
