@@ -12,11 +12,11 @@ from ..objects.Response import Response
 
 def response(code:int|str, t:type = None, contentType:str = 'application/json', description:str = None, headers:dict[str,Header|type] = None) -> Callable:
     """
-    Indicates a potential response of a request handler method. A response definition may or may not define a response payload using `t` and `contentType`.
+    Indicates a potential response of a request handler method. A response definition may or may not define a response payload using ``t`` and ``contentType``.
 
-    :param int code: REQUIRED. An HTTP Status Code, such as `200`, or `429`.
+    :param int code: REQUIRED. An HTTP Status Code, such as ``200``, or ``429``.
     :param type t: If a payload should be expected in the response, this indicates the type of the payload to expect.
-    :param str contentType: If a response payload is expected, this indicates the Content-Type of that payload. Default is `"application/json"`.
+    :param str contentType: If a response payload is expected, this indicates the ``Content-Type`` of that payload. Default is ``"application/json"``.
     :param str description: An optional description for the expected content.
     """
     if type(code) is int:

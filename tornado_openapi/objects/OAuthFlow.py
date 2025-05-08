@@ -18,7 +18,7 @@ class OAuthFlow(DescriptionObject):
 
     @property
     def authorizationUrl(self) -> str|None:
-        """REQUIRED FOR `IMPLCIIT` OR `AUTHORIZATIONCODE`. The authorization URL to be used for this flow. This MUST be in the form of a URL. The OAuth2 standard requires the use of TLS."""
+        """REQUIRED FOR ``IMPLCIIT`` OR ``AUTHORIZATIONCODE``. The authorization URL to be used for this flow. This MUST be in the form of a URL. The OAuth2 standard requires the use of TLS."""
         return self.get('authorizationUrl', None)
     @authorizationUrl.setter
     def authorizationUrl(self, v:str|None) -> None:
@@ -29,7 +29,7 @@ class OAuthFlow(DescriptionObject):
 
     @property
     def tokenUrl(self) -> str|None:
-        """REQUIRED FOR `PASSWORD`, `CLIENTCREDENTIALS`, OR `AUTHORIZATIONCODE`. The token URL to be used for this flow. This MUST be in the form of a URL. The OAuth2 standard requires the use of TLS."""
+        """REQUIRED FOR ``PASSWORD``, ``CLIENTCREDENTIALS``, OR ``AUTHORIZATIONCODE``. The token URL to be used for this flow. This MUST be in the form of a URL. The OAuth2 standard requires the use of TLS."""
         return self.get('tokenUrl', None)
     @tokenUrl.setter
     def tokenUrl(self, v:str|None) -> None:

@@ -20,7 +20,7 @@ class SecurityRequirement(DescriptionObject):
     ---
     NOTE: Due to the nature of this type there are no properties defined, instead,
     developers accessing this type should prefer indexer syntax, as if it were
-    a dictionary of `list[str]` types.
+    a dictionary of ``list[str]`` types.
     """
 
     def __init__(self, requirements:dict[str,list[str]] = None) -> None:

@@ -13,10 +13,10 @@ def header(name:str, t:type = str, description:str = None, required:bool = False
     Indicates that a request handler expects a particular header.
 
     :param str name: REQUIRED. The header name that is expected.
-    :param type t: If the header represents a particular data type. Encoding/Decoding the header remains the responsibility of the application/server. Default is `str`.
+    :param type t: If the header represents a particular data type. Encoding/Decoding the header remains the responsibility of the application/server. Default is ``str``.
     :param str description: An optional description for the header or its content.
-    :param bool required: `True` If the header is required. Default is `False`.
-    :param bool deprecated: `True` If the header is deprecated. Default is `False`.
+    :param bool required: ``True`` If the header is required. Default is ``False``.
+    :param bool deprecated: ``True`` If the header is deprecated. Default is ``False``.
     """
     def wrapper(target:Callable) -> Callable:
         headers = MetaManager.instance().headers.get(target, None)

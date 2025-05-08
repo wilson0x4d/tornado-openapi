@@ -11,7 +11,7 @@ class DescriptionObject(ABC):
     """
     A base class for all "Description Objects" that need to convert to/from dictionary objects internally.
 
-    This because, ultimately, all Description Objects must be serialized to JSON (or YAML) and the easiest way to accomplish this is to pull a `dict` object hierarchy.
+    This because, ultimately, all Description Objects must be serialized to JSON (or YAML) and the easiest way to accomplish this is to pull a ``dict`` object hierarchy.
     """
 
     __d:dict[str,Any]
@@ -66,7 +66,7 @@ class DescriptionObject(ABC):
 
     def merge(self, other:DescriptionObject|dict) -> Any:
         """
-        Merges the contents of another `DescriptionObject` (or dictionary) into the current instance.
+        Merges the contents of another :py:class:`~tornado_openapi.objects.DescriptionObject` (or dictionary) into the current instance.
 
         :param DescriptionObject|dict other: The "other" object to merge.
         

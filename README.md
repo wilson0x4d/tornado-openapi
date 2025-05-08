@@ -12,34 +12,48 @@ pip install tornado-openapi
 
 ## Quick Start
 
-For the broadest support, your tornado entry should have a regex which resolves `swagger` files.
-
-Consider this naive example:
+The simplest approach is to use `OpenApiConfigurator` to construct a configuration object, and also update a `tornado.web.application` instance with necessary settings. A simple example might look like:
 
 ```python
-import tornado_openapi as openapi
-import tornado.web
 
-tornado.web.Application([
-    (r'/(swagger.*)', openapi.OpenApiHandler)
-])
+    import tornado
+    import tornado_openapi as openapi
+    from .api.FakeApi import FakeApi
+
+    # you create a tornado app
+    app = tornado.web.Application()
+    # you add some handlers for your app
+    app.add_handlers('.*', [
+        (r'/api/v2/fakes', FakeApi),
+        (r'/api/v2/fakes/(?P<id>\d+)', FakeApi),
+        (r'/api/v2/fakes/(?P<name>[\dA-Za-z]+)', FakeApi),
+        (r'/api/v2/fakes/(?P<id>\d+)?name=(?P<name>[^/][\dA-Za-z]+)', FakeApi)
+    ])
+    # you configure openapi
+    openapi.OpenApiConfigurator(self.__tornado)\
+        .pattern(r'/api/v2/(swagger.*)')\
+        .info(openapi.objects.Info(
+            title='My API',
+            summary='APIs exposed by My Application',
+            description='This is an optional long description of My Application APIs.',
+            termsOfService='https://my-application/terms-of-service0',
+            contact=openapi.objects.Contact(
+                name='My Application on Github',
+                url='https://github.com/whoami/my-application'
+            ),
+            license=openapi.objects.License(
+                name='MIT License',
+                identifier='MIT'
+            ),
+            version='v2'
+        ))\
+        .staticFilesPath('./swagger-ui')\
+        .commit()
 ```
 
-Or, if you prefer something more constrained:
+In the above example, `FakeApi` is a subclass of `tornado.web.RequestHandler`. The path matches you configure for `FakeApi` are requried for OAS construction. There are more configuration options than are shown here, and there are decorators you can apply to your request handler classes and methods to augment OAS generation.
 
-```python
-tornado.web.Application([
-    (r'/swagger/(.*)', openapi.OpenApiHandler)
-])
-```
-
-These path matches ensure that `OpenApiHandler` is able to accept and handle
-swagger document requests. By default OpenApiHandler will serve `swagger-ui`
-if no document name is provided. If you specify "swagger.json" in
-the uri the handler will instead generate a schema document (as opposed
-to serving `swagger-ui`.)
-
-## Wait, where is `swagger-ui` ?
+## Wait, where is `swagger-ui` ?!
 
 Alas, `swagger-ui` is NOT included as part of the `tornado-openapi` library. The reasons, in order of importance:
 
@@ -78,7 +92,7 @@ If you have an existing front-end with `swagger-ui` installed as a package (via 
 Lastly, you can customize the static files path of `swagger-ui` and the url of `swagger.json` by passing in additional intializer params:
 
 ```python
-(r'/(swagger.*)', openapi.OpenApiHandler, { swaggerStaticFiles='/path/to/swagger-ui', swaggerJsonUrl='/swagger/swagger.json' })
+(r'/(swagger.*)', openapi.OpenApiHandler, { swaggerStaticFiles='/path/to/swagger-ui' })
 ```
 
 Enjoy!

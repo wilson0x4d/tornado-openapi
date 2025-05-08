@@ -16,7 +16,7 @@ from .objects import Components, OpenAPI, Parameter, ParameterLocation, Paths, P
 
 class OpenApiHandler(tornado.web.RequestHandler):
     """
-    A handler that can return OpenAPI schema docs and `swagger-ui` test pages (if installed.)
+    A handler that can return OpenAPI schema docs and ``swagger-ui`` test pages (if installed.)
     """
 
     __configuration:OpenApiConfiguration
@@ -231,11 +231,11 @@ class OpenApiHandler(tornado.web.RequestHandler):
             result:OpenAPI = self.__buildOpenApiSchema()
             self.write(json.dumps(result.asDictionary()))
             pass
-        elif path.endswith('.yaml'):
-            # TODO: interrogate oas state and serialize to yaml
-            self.set_header('Content-Type', 'application/yaml')
-            # TODO: this should only be performed with `extras` installed, since not everyone will appreciate addt'l dependencies
-            pass
+        # elif path.endswith('.yaml'):
+        #     # TODO: interrogate oas state and serialize to yaml
+        #     self.set_header('Content-Type', 'application/yaml')
+        #     # TODO: this should only be performed with `extras` installed, since not everyone will appreciate addt'l dependencies
+        #     pass
         else:
             # all other documents will be treated as static resources
             # we strip off any path parts to load `swagger-ui` files directly from disk

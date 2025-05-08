@@ -21,7 +21,7 @@ class Responses(DescriptionObject):
 
     ---
     NOTE: Due to the nature of this type developers accessing this type
-    should prefer indexer syntax, as if it were a dictionary of `Response|Reference` types.
+    should prefer indexer syntax, as if it were a dictionary of ``Response|Reference`` types.
     """
 
     def __init__(self, d:dict[str,Any] = None, default:Response|Reference = None, codes:dict[str,Response|Reference] = None) -> None:

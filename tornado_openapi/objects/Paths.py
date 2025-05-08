@@ -17,7 +17,7 @@ class Paths(DescriptionObject):
     ---
     NOTE: Due to the nature of this type there are no properties defined, instead,
     developers accessing this type should prefer indexer syntax, as if it were
-    a dictionary of `PathItem` types.
+    a dictionary of :py:class:`~tornado.objects.PathItem` types.
     """
 
     def __init__(self, paths:dict[str,PathItem] = None) -> None:

@@ -21,7 +21,7 @@ class Callback(DescriptionObject):
     ---
     NOTE: Due to the nature of this type there are no properties defined, instead,
     developers accessing this type should prefer indexer syntax, as if it were
-    a dictionary of `PathItem` types.
+    a dictionary of :py:class:`~tornado_openapi.objects.PathItem` types.
     """
 
     def __init__(self, d:dict[str,PathItem] = None) -> None:
