@@ -1,3 +1,7 @@
+
+[![tornado-openapi on PyPI](https://img.shields.io/pypi/v/tornado-openapi.svg)](https://pypi.org/project/tornado-openapi/) [![tornado-openapi on readthedocs](https://readthedocs.org/projects/tornado-openapi/badge/?version=latest)](https://tornado-openapi.readthedocs.io)
+
+
 `tornado-openapi` is an OAS-generation library for [Tornado](https://www.tornadoweb.org).
 
 This README is only a high-level introduction to **tornado-openapi**. For more detailed documentation, please view the official docs at [https://tornado-openapi.readthedocs.io](https://tornado-openapi.readthedocs.io).
@@ -94,6 +98,8 @@ Lastly, you can customize the static files path of `swagger-ui` and the url of `
 ```python
 (r'/(swagger.*)', openapi.OpenApiHandler, { swaggerStaticFiles='/path/to/swagger-ui' })
 ```
+
+Or if you are using `OpenApiConfigurator`, you can specify the location using the `staticFilesPath(...)` method (as seen in the section above.)
 
 Enjoy!
 
