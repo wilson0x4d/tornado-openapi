@@ -19,6 +19,7 @@ _d = dict[int,str]()
 
 type FakeObj = FakeObj
 class FakeObj:
+    """An object composed of attributes."""
     one:int
     two:str
     three:UUID
@@ -34,6 +35,30 @@ class FakeObj:
     nine:dict[str,UUID]
     # TODO: tuples?
     ten:tuple[str,int,UUID]
+
+
+class FakePropertyObj:
+    """An object composed of properties."""
+
+    _foo:str
+    __bar:str
+
+    def __init__(self) -> None:
+        self._foo = None
+        self.__bar = None
+
+    @property
+    def foo(self) -> str:
+        """A read-only property"""
+        return self._foo
+
+    @property
+    def bar(self) -> int:
+        """A read-write property"""
+        return self.__bar
+    @bar.setter
+    def bar(self, value:int) -> None:
+        self.__bar = value
 
 
 @openapi.api()
@@ -72,7 +97,7 @@ class FakeApi(tornado.web.RequestHandler):
             _d.pop(id, None)
 
     @openapi.request(FakeObj, 'application/json')
-    @openapi.response(200, FakeObj, 'application/json', description='Success')
+    @openapi.response(200, FakePropertyObj, 'application/json', description='Success')
     @openapi.header('Rumple-Stiltskin', required=True)
     async def post(self) -> None:
         # NOTE: echo endpoint

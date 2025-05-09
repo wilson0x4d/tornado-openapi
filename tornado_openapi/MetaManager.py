@@ -130,6 +130,9 @@ class MetaManager:
             return f'#/components/schemas/{t.__module__}'
         else:
             return f'#/components/schemas/{t.__module__}.{t.__name__}'
+        
+    def __isproperty(self, target:Any) -> bool:
+        return target is not None and hasattr(target, 'fget')
 
     def getSchemaForType(self, t:type) -> Schema|Reference:
         schemaRef:str = self.__getSchemaRefForType(t if t is not None else Any)
@@ -149,7 +152,6 @@ class MetaManager:
                         'items': MetaManager.instance().schemas.get('any').asDictionary()
                     })
             case 'dict':
-                # NOTE: recheck for dict and emit 'additionalProperties' (or allow 'any' items)
                 if hasattr(t, '__args__'):
                     argSchemaRef = self.__getSchemaRefForType(t.__args__[1])
                     argSchema = MetaManager.instance().schemas.get(argSchemaRef)
@@ -190,8 +192,18 @@ class MetaManager:
                     MetaManager.instance().schemas[schemaRef] = schema
                     schema['type'] = 'object'
                     schema['properties'] = dict[str, dict[str,str]]()
-                    typeMembers = [(k,v) for k,v in inspect.get_annotations(t).items()]
+                    typeAttributes = [(k,v) for k,v in inspect.get_annotations(t).items() if not k.startswith('_')]
+                    for attributeName, attributeType in typeAttributes:
+                        if attributeType is None:
+                            schema['properties'][attributeName] = {
+                                'type': 'any'
+                            }
+                        else:
+                            attributeSchema = self.getSchemaForType(attributeType)
+                            schema['properties'][attributeName] = attributeSchema.asDictionary()
+                    typeMembers = [(k,inspect.get_annotations(getattr(v,'fget'))) for k,v in inspect.getmembers(t, lambda e: self.__isproperty(e)) if not k.startswith('_')]
                     for memberName, memberType in typeMembers:
+                        memberType = None if memberType is None else memberType.get('return', None)
                         if memberType is None:
                             schema['properties'][memberName] = {
                                 'type': 'any'

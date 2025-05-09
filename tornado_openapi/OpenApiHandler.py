@@ -176,6 +176,15 @@ class OpenApiHandler(tornado.web.RequestHandler):
                                         schemaRef = p.get('$ref', None)
                                         if schemaRef is not None:
                                             self.__requiredSchemas.add(schemaRef)
+                                # update required schemas (responses)
+                                if operation.responses is not None:
+                                    for code,r in operation.responses.asDictionary().items():
+                                        if r.get('content', None) is not None:
+                                            for k,v in r['content'].items():
+                                                s = v.get('schema', None)
+                                                schemaRef = None if s is None else s.get('$ref', None)
+                                                if schemaRef is not None:
+                                                    self.__requiredSchemas.add(schemaRef)
                                 # security requirements
                                 securityRequirements = MetaManager.instance().security.get(action, None)
                                 if securityRequirements is None:

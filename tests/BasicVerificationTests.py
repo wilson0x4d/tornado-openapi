@@ -112,8 +112,30 @@ async def oasMatchesSetup() -> None:
     assert oas.components.securitySchemes.get('bearerToken', None) is not None
     assert oas.components.securitySchemes.get('bearerToken', None).bearerFormat == 'JWT'
     assert oas.components.schemas is not None
-    assert len(oas.components.schemas.items()) == 1
+    assert len(oas.components.schemas.items()) == 2
     assert oas.components.schemas['tests.fakes.FakeApi.FakeObj'] is not None
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['type'] == 'object'
+    assert len(oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']) == 10
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['one']['type'] == 'number'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['two']['type'] == 'string'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['three']['type'] == 'string'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['three']['format'] == 'uuid'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['four']['type'] == 'string'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['four']['format'] == 'date-time'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['five']['type'] == 'number'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['six']['type'] == 'boolean'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['seven']['$ref'] == '#/components/schemas/tests.fakes.FakeApi.FakeObj'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['eight']['type'] == 'array' #list
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['nine']['type'] == 'object' #dict
+    assert oas.components.schemas['tests.fakes.FakeApi.FakeObj']['properties']['ten']['type'] == 'array' #tuple
+    # TODO: confirm expected object schema (attributes)
+    assert oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj'] is not None
+    assert oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['type'] == 'object'
+    assert len(oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['properties']) == 2
+    assert oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['properties']['foo']['type'] == 'string'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['properties']['bar']['type'] == 'number'
+    # TODO: confirm expected object schema (properties, no 'private' attributes)
+
     # confirm that the API definition does not require a bearer token for all tags
     assert oas.security is None
     # returns provided info
@@ -153,7 +175,7 @@ async def oasMatchesSetup() -> None:
     assert oas.paths['/api/v2/fakes'].post.requestBody.content['application/json'].schema.ref == '#/components/schemas/tests.fakes.FakeApi.FakeObj'
     assert oas.paths['/api/v2/fakes'].post.responses is not None
     assert oas.paths['/api/v2/fakes'].post.responses['200'] is not None
-    assert oas.paths['/api/v2/fakes'].post.responses['200'].content['application/json'].schema.ref == '#/components/schemas/tests.fakes.FakeApi.FakeObj'
+    assert oas.paths['/api/v2/fakes'].post.responses['200'].content['application/json'].schema.ref == '#/components/schemas/tests.fakes.FakeApi.FakePropertyObj'
     assert oas.paths['/api/v2/fakes'].post.security is not None
     assert oas.paths['/api/v2/fakes'].post.security[0].get('bearerToken', None) is not None
     # /api/v2/fakes/{id}, only maps to GET, accepts an optional cookie 'OMNOMNOM', and responds 200 OK with a `FakeObj` payload. should allow anonymous access.
