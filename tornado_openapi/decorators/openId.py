@@ -11,6 +11,7 @@ def openId(target:Callable) -> Callable:
     """
     Indicates that MUTUAL TLS Auth is required.
     """
+    origin = target
     while hasattr(target, '__wrapped__'):
         target = getattr(target, '__wrapped__')
     security = MetaManager.instance().security.get(target, None)
@@ -20,4 +21,4 @@ def openId(target:Callable) -> Callable:
     security.append(SecurityRequirement({
         'openIdConnect':[]
     }))
-    return target
+    return origin

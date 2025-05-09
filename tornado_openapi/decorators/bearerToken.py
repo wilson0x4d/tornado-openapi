@@ -11,6 +11,7 @@ def bearerToken(target:Callable) -> Callable:
     """
     Indicates that BEARER TOKEN Auth is required.
     """
+    origin = target
     while hasattr(target, '__wrapped__'):
         target = getattr(target, '__wrapped__')
     security = MetaManager.instance().security.get(target, None)
@@ -20,4 +21,4 @@ def bearerToken(target:Callable) -> Callable:
     security.append(SecurityRequirement({
         'bearerToken':[]
     }))
-    return target
+    return origin

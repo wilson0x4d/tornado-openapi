@@ -11,6 +11,7 @@ def anonymous(target:Callable) -> Callable:
     """
     Indicates that a request handler, or request handler method, should not require authentication.
     """
+    origin = target
     while hasattr(target, '__wrapped__'):
         target = getattr(target, '__wrapped__')
     security = MetaManager.instance().security.get(target, None)
@@ -19,4 +20,4 @@ def anonymous(target:Callable) -> Callable:
         MetaManager.instance().security[target] = security
     # intentionally adding an empty security requirement as an override to allow anonymous access
     security.append(SecurityRequirement())
-    return target
+    return origin

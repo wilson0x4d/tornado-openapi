@@ -22,6 +22,7 @@ def response(code:int|str, t:type = None, contentType:str = 'application/json', 
     if type(code) is int:
         code = str(code)
     def wrapper(target:Callable) -> Callable:
+        origin = target
         while hasattr(target, '__wrapped__'):
             target = getattr(target, '__wrapped__')
         responses = MetaManager.instance().responses.get(target, None)
@@ -54,5 +55,5 @@ def response(code:int|str, t:type = None, contentType:str = 'application/json', 
             }
         # TODO: links?
         responses[code] = response
-        return target
+        return origin
     return wrapper

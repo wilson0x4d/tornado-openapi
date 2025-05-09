@@ -19,6 +19,7 @@ def cookie(name:str, t:type = str, description:str = None, required:bool = False
     :param bool deprecated: ``True`` If the cookie is deprecated. Default is ``False``.
     """
     def wrapper(target:Callable) -> Callable:
+        origin = target
         while hasattr(target, '__wrapped__'):
             target = getattr(target, '__wrapped__')
         cookies = MetaManager.instance().cookies.get(target, None)
@@ -36,5 +37,5 @@ def cookie(name:str, t:type = str, description:str = None, required:bool = False
         cookie.deprecated = True if deprecated == True else None
         cookie.schema = MetaManager.instance().getSchemaForType(t)
         cookies[name] = cookie
-        return target
+        return origin
     return wrapper

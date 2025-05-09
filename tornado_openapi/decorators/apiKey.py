@@ -11,6 +11,7 @@ def apiKey(target:Callable) -> Callable:
     """
     Indicates that API KEY Auth is required.
     """
+    origin = target
     while hasattr(target, '__wrapped__'):
         target = getattr(target, '__wrapped__')
     security = MetaManager.instance().security.get(target, None)
@@ -20,4 +21,4 @@ def apiKey(target:Callable) -> Callable:
     security.append(SecurityRequirement({
         'apiKey':[]
     }))
-    return target
+    return origin

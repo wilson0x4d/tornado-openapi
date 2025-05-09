@@ -19,6 +19,7 @@ def api(tag:str = None) -> Callable:
     """
     def wrapper(target:Callable) -> Callable:
         nonlocal tag
+        origin = target
         while hasattr(target, '__wrapped__'):
             target = getattr(target, '__wrapped__')
         if tag is None and hasattr(target, '__class__') and target.__class__.__name__ == 'type':
@@ -29,5 +30,5 @@ def api(tag:str = None) -> Callable:
                 MetaManager.instance().tags[target] = list[str]([tag])
             else:
                 tags.append(tag)
-        return target
+        return origin
     return wrapper

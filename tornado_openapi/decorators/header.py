@@ -19,6 +19,7 @@ def header(name:str, t:type = str, description:str = None, required:bool = False
     :param bool deprecated: ``True`` If the header is deprecated. Default is ``False``.
     """
     def wrapper(target:Callable) -> Callable:
+        origin = target
         while hasattr(target, '__wrapped__'):
             target = getattr(target, '__wrapped__')
         headers = MetaManager.instance().headers.get(target, None)
@@ -36,5 +37,5 @@ def header(name:str, t:type = str, description:str = None, required:bool = False
         header.deprecated = True if deprecated == True else None
         header.schema = MetaManager.instance().getSchemaForType(t)
         headers[name] = header
-        return target
+        return origin
     return wrapper

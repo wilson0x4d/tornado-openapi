@@ -11,6 +11,7 @@ def httpBasic(target:Callable) -> Callable:
     """
     Indicates that HTTP BASIC Auth is required.
     """
+    origin = target
     while hasattr(target, '__wrapped__'):
         target = getattr(target, '__wrapped__')
     security = MetaManager.instance().security.get(target, None)
@@ -20,4 +21,4 @@ def httpBasic(target:Callable) -> Callable:
     security.append(SecurityRequirement({
         'httpBasic':[]
     }))
-    return target
+    return origin
