@@ -41,7 +41,7 @@ _wellKnownTypeSchemas:dict[str,Schema] = {
         example=True
     )),
     'UUID': Schema().merge(dict(
-        type='str',
+        type='string',
         format='uuid',
         example=str(uuid4())
     )),
