@@ -11,8 +11,10 @@
 from datetime import datetime
 from uuid import UUID
 import tornado
-
 import tornado_openapi as openapi
+
+from .fakedeco import fakedeco
+
 
 _d = dict[int,str]()
 
@@ -42,6 +44,7 @@ class FakePropertyObj:
 
     _foo:str
     __bar:str
+    __bleh:datetime
 
     def __init__(self) -> None:
         self._foo = None
@@ -60,6 +63,14 @@ class FakePropertyObj:
     def bar(self, value:int) -> None:
         self.__bar = value
 
+    @property
+    def bleh(self) -> datetime:
+        """A datetime property"""
+        return self.__bleh
+    @bleh.setter
+    def bleh(self, value:int) -> None:
+        self.__bleh = value
+
 
 @openapi.api()
 @openapi.bearerToken
@@ -75,10 +86,12 @@ class FakeApi(tornado.web.RequestHandler):
         self.write(_d.get(id, ''))
 
     @openapi.response('204', description='Success')
+    @fakedeco # intentionally appears BETWEEN other decorators
     @openapi.response('default', description='Error')
     async def put(self, id:int, name:str) -> None:
         _d[id] = name
 
+    @fakedeco # intentionally appears BEFORE other decorators
     @openapi.response('2XX', description='Success')
     @openapi.response('default', description='Error', headers={
         # full control over header definition
@@ -99,6 +112,7 @@ class FakeApi(tornado.web.RequestHandler):
     @openapi.request(FakeObj, 'application/json')
     @openapi.response(200, FakePropertyObj, 'application/json', description='Success')
     @openapi.header('Rumple-Stiltskin', required=True)
+    @fakedeco # intentionally appears AFTER other decorators
     async def post(self) -> None:
         # NOTE: echo endpoint
         buf = self.request.body

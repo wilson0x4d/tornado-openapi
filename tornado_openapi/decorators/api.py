@@ -19,6 +19,8 @@ def api(tag:str = None) -> Callable:
     """
     def wrapper(target:Callable) -> Callable:
         nonlocal tag
+        while hasattr(target, '__wrapped__'):
+            target = getattr(target, '__wrapped__')
         if tag is None and hasattr(target, '__class__') and target.__class__.__name__ == 'type':
             tag = target.__name__
         if tag is not None:

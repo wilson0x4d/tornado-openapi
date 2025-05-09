@@ -131,9 +131,11 @@ async def oasMatchesSetup() -> None:
     # TODO: confirm expected object schema (attributes)
     assert oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj'] is not None
     assert oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['type'] == 'object'
-    assert len(oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['properties']) == 2
+    assert len(oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['properties']) == 3
     assert oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['properties']['foo']['type'] == 'string'
     assert oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['properties']['bar']['type'] == 'number'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['properties']['bleh']['type'] == 'string'
+    assert oas.components.schemas['tests.fakes.FakeApi.FakePropertyObj']['properties']['bleh']['format'] == 'date-time'
     # TODO: confirm expected object schema (properties, no 'private' attributes)
 
     # confirm that the API definition does not require a bearer token for all tags

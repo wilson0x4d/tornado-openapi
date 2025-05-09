@@ -12,6 +12,8 @@ def oauth2(scopes:list[str] = []) -> Callable:
     Indicates that OAUTH2 Auth is required.
     """
     def wrapper(target:Callable) -> Callable:
+        while hasattr(target, '__wrapped__'):
+            target = getattr(target, '__wrapped__')
         security = MetaManager.instance().security.get(target, None)
         if security is None:
             security = list[SecurityRequirement]()

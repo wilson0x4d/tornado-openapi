@@ -18,6 +18,8 @@ def request(t:type, contentType:str = 'application/json', encoding:str = None, d
     :param str description: An optional description for the expected content.
     """
     def wrapper(target:Callable) -> Callable:
+        while hasattr(target, '__wrapped__'):
+            target = getattr(target, '__wrapped__')
         if t is not None:
             requestBody = MetaManager.instance().requests.get(target, None)
             if requestBody is None:

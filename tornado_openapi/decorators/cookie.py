@@ -19,6 +19,8 @@ def cookie(name:str, t:type = str, description:str = None, required:bool = False
     :param bool deprecated: ``True`` If the cookie is deprecated. Default is ``False``.
     """
     def wrapper(target:Callable) -> Callable:
+        while hasattr(target, '__wrapped__'):
+            target = getattr(target, '__wrapped__')
         cookies = MetaManager.instance().cookies.get(target, None)
         if cookies is None:
             cookies = dict[str, Parameter]()

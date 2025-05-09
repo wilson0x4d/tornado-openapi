@@ -19,6 +19,8 @@ def header(name:str, t:type = str, description:str = None, required:bool = False
     :param bool deprecated: ``True`` If the header is deprecated. Default is ``False``.
     """
     def wrapper(target:Callable) -> Callable:
+        while hasattr(target, '__wrapped__'):
+            target = getattr(target, '__wrapped__')
         headers = MetaManager.instance().headers.get(target, None)
         if headers is None:
             headers = dict[str, Parameter]()

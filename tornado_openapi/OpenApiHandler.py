@@ -98,6 +98,8 @@ class OpenApiHandler(tornado.web.RequestHandler):
                 if issubclass(rule.target, tornado.web.RequestHandler):
                     for actionName in ['delete', 'get', 'head', 'options', 'patch', 'post', 'put', 'trace']:
                         action = rule.target.__dict__.get(actionName, None)
+                        while hasattr(action, '__wrapped__'):
+                            action = getattr(action, '__wrapped__')
                         if action is not None:
                             operation = Operation()
                             # tags

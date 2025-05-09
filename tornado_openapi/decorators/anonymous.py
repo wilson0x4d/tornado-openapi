@@ -11,6 +11,8 @@ def anonymous(target:Callable) -> Callable:
     """
     Indicates that a request handler, or request handler method, should not require authentication.
     """
+    while hasattr(target, '__wrapped__'):
+        target = getattr(target, '__wrapped__')
     security = MetaManager.instance().security.get(target, None)
     if security is None:
         security = list[SecurityRequirement]()

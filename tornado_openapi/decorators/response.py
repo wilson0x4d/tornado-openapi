@@ -22,6 +22,8 @@ def response(code:int|str, t:type = None, contentType:str = 'application/json', 
     if type(code) is int:
         code = str(code)
     def wrapper(target:Callable) -> Callable:
+        while hasattr(target, '__wrapped__'):
+            target = getattr(target, '__wrapped__')
         responses = MetaManager.instance().responses.get(target, None)
         if responses is None:
             responses = Responses()
